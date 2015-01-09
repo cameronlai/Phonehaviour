@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_about">About</string>
+
+    <string name="about_description">
+        People spend hours and hours on their phone, watching news, TV series and social networks.
+        How much time is everyone spending on your phone each day?
+        To find out the answer to the question,
+        Phonehaviour was created to allow users to monitor their phone usage.
+        Hope this will help you understand how much time you are spending on your phone and apps.
+        If possible, spend less time on your phone and more time with your family and friends. :)
+    </string>
+
+</resources>
