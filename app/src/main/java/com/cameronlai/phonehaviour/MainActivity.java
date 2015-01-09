@@ -1,16 +1,25 @@
 package com.cameronlai.phonehaviour;
 
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.audiofx.BassBoost;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.*;
 import java.util.Arrays;
+import java.util.List;
+import java.util.prefs.Preferences;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -20,6 +29,19 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Confirm usage access
+        // String tmpSettingStr = Settings.System.getString( getContentResolver(), Settings.ACTION_USAGE_ACCESS_SETTINGS  );
+        // If not, prompt the user to set the usage access settings
+
+        // Get usage statistics from Android OS
+        final UsageStatsManager mUsageStatManager = (UsageStatsManager) getApplicationContext().getSystemService("usagestats");
+        final List<UsageStats> stats = mUsageStatManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0,  System.currentTimeMillis());
+
+        int tmp = stats.size();
+        String displayString = "Number of usage stats: " + tmp;
+        TextView textViewNumUsageStats = (TextView) findViewById(R.id.number_of_usageStats);
+        textViewNumUsageStats.setText(displayString);
 
         // More information about Android Plot
         // e.g. Dynamic data

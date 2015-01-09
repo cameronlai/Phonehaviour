@@ -1,9 +1,12 @@
 package com.cameronlai.phonehaviour;
 
+import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class AboutActivity extends ActionBarActivity {
@@ -27,5 +30,13 @@ public class AboutActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /** Called when the user clicks the Usage Access Settings button */
+    public void gotoUsageAccessSettings(View view)
+    {
+        // Do something in response to button
+        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+        startActivity(intent);
     }
 }

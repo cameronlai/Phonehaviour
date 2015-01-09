@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cameronlai.phonehaviour" >
 
+    <user-permission android:sharedUserId="android.uid.system"/>
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"

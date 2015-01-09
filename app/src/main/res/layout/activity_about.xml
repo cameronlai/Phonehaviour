@@ -11,4 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to Usage Access Settings"
+        android:id="@+id/button"
+        android:onClick="gotoUsageAccessSettings"
+        android:layout_gravity="center_horizontal" />
+
+
 </LinearLayout>
