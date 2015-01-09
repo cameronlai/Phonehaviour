@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.androidplot.xy.SimpleXYSeries;
@@ -40,12 +41,22 @@ public class MainActivity extends ActionBarActivity {
         final List<UsageStats> stats = mUsageStatManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0,  System.currentTimeMillis());
 
         List<Number> series1Numbers = new ArrayList<Number>();
+        String strAllPackageNames = "";
         for (int i=0; i<stats.size(); i++) {
             series1Numbers.add(stats.get(i).getTotalTimeInForeground());
+            strAllPackageNames += i+1;
+            strAllPackageNames += ": ";
+            strAllPackageNames += stats.get(i).getPackageName();
+            strAllPackageNames += " - ";stats.get(i).
+            strAllPackageNames += series1Numbers.get(i);
+            strAllPackageNames += "\n";
         }
         String displayString = "Number of usage stats: " + stats.size();
         TextView textViewNumUsageStats = (TextView) findViewById(R.id.number_of_usageStats);
         textViewNumUsageStats.setText(displayString);
+
+        TextView textViewAllPackageNames = (TextView) findViewById(R.id.main_activity_all_package_name);
+        textViewAllPackageNames.setText(strAllPackageNames);
 
         // More information about Android Plot
         // e.g. Dynamic data
