@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,8 +39,11 @@ public class MainActivity extends ActionBarActivity {
         final UsageStatsManager mUsageStatManager = (UsageStatsManager) getApplicationContext().getSystemService("usagestats");
         final List<UsageStats> stats = mUsageStatManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0,  System.currentTimeMillis());
 
-        int tmp = stats.size();
-        String displayString = "Number of usage stats: " + tmp;
+        List<Number> series1Numbers = new ArrayList<Number>();
+        for (int i=0; i<stats.size(); i++) {
+            series1Numbers.add(stats.get(i).getTotalTimeInForeground());
+        }
+        String displayString = "Number of usage stats: " + stats.size();
         TextView textViewNumUsageStats = (TextView) findViewById(R.id.number_of_usageStats);
         textViewNumUsageStats.setText(displayString);
 
@@ -55,11 +60,11 @@ public class MainActivity extends ActionBarActivity {
         plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
 
         // Create a couple arrays of y-values to plot:
-        Number[] series1Numbers = {1, 8, 5, 2, 7, 4};
+
 
         // Turn the above arrays into XYSeries':
         XYSeries series1 = new SimpleXYSeries(
-                Arrays.asList(series1Numbers),          // SimpleXYSeries takes a List so turn our array into a List
+                series1Numbers,          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
                 "Series1");                             // Set the display title of the series
 
