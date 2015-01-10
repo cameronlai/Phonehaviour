@@ -36,6 +36,52 @@ public class MainActivity extends ActionBarActivity {
         // String tmpSettingStr = Settings.System.getString( getContentResolver(), Settings.ACTION_USAGE_ACCESS_SETTINGS  );
         // If not, prompt the user to set the usage access settings
 
+        updateUsageStatistics();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        updateUsageStatistics();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings)
+        {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_about)
+        {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void updateUsageStatistics()
+    {
         // Get usage statistics from Android OS
         final UsageStatsManager mUsageStatManager = (UsageStatsManager) getApplicationContext().getSystemService("usagestats");
         final List<UsageStats> stats = mUsageStatManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0,  System.currentTimeMillis());
@@ -47,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
             strAllPackageNames += i+1;
             strAllPackageNames += ": ";
             strAllPackageNames += stats.get(i).getPackageName();
-            strAllPackageNames += " - ";stats.get(i).
+            strAllPackageNames += " - ";
             strAllPackageNames += series1Numbers.get(i);
             strAllPackageNames += "\n";
         }
@@ -94,37 +140,5 @@ public class MainActivity extends ActionBarActivity {
         plot.setTicksPerRangeLabel(3);
         plot.setTicksPerDomainLabel(1);
         plot.getGraphWidget().setDomainLabelOrientation(-45);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_about)
-        {
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
