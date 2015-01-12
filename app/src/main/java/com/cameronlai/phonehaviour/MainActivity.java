@@ -97,7 +97,6 @@ public class MainActivity extends ActionBarActivity {
             strAllPackageNames += stats.get(i).getPackageName();
             strAllPackageNames += " - ";
             strAllPackageNames += series1Numbers.get(i);
-            strAllPackageNames += "\n";
             seriesStrings.add(strAllPackageNames);
         }
         String displayString = "Number of usage stats: " + stats.size();
