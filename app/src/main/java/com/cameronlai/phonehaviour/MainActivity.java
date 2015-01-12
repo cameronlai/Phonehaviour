@@ -87,29 +87,15 @@ public class MainActivity extends ActionBarActivity {
         final List<UsageStats> stats = mUsageStatManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0,  System.currentTimeMillis());
 
         List<Number> series1Numbers = new ArrayList<Number>();
-        List<String> seriesStrings  = new ArrayList<String>();
-        String strAllPackageNames = "";
         for (int i=0; i<stats.size(); i++) {
             series1Numbers.add(stats.get(i).getTotalTimeInForeground());
-            strAllPackageNames = "";
-            strAllPackageNames += i+1;
-            strAllPackageNames += ": ";
-            strAllPackageNames += stats.get(i).getPackageName();
-            strAllPackageNames += " - ";
-            strAllPackageNames += series1Numbers.get(i);
-            seriesStrings.add(strAllPackageNames);
         }
         String displayString = "Number of usage stats: " + stats.size();
         TextView textViewNumUsageStats = (TextView) findViewById(R.id.number_of_usageStats);
         textViewNumUsageStats.setText(displayString);
 
-        //TextView textViewAllPackageNames = (TextView) findViewById(R.id.main_activity_all_package_name);
-        //textViewAllPackageNames.setText(strAllPackageNames);
         mListView = (ListView) findViewById(R.id.main_activity_all_package_name);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, seriesStrings);
-
+        ListEntryArrayAdapter adapter = new ListEntryArrayAdapter(this, stats);
         mListView.setAdapter(adapter);
 
         // More information about Android Plot
