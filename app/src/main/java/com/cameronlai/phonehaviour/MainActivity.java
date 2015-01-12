@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private XYPlot plot;
+    ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,6 @@ public class MainActivity extends ActionBarActivity {
         // Confirm usage access
         // String tmpSettingStr = Settings.System.getString( getContentResolver(), Settings.ACTION_USAGE_ACCESS_SETTINGS  );
         // If not, prompt the user to set the usage access settings
-
-        updateUsageStatistics();
     }
 
     @Override
@@ -87,22 +87,31 @@ public class MainActivity extends ActionBarActivity {
         final List<UsageStats> stats = mUsageStatManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, 0,  System.currentTimeMillis());
 
         List<Number> series1Numbers = new ArrayList<Number>();
+        List<String> seriesStrings  = new ArrayList<String>();
         String strAllPackageNames = "";
         for (int i=0; i<stats.size(); i++) {
             series1Numbers.add(stats.get(i).getTotalTimeInForeground());
+            strAllPackageNames = "";
             strAllPackageNames += i+1;
             strAllPackageNames += ": ";
             strAllPackageNames += stats.get(i).getPackageName();
             strAllPackageNames += " - ";
             strAllPackageNames += series1Numbers.get(i);
             strAllPackageNames += "\n";
+            seriesStrings.add(strAllPackageNames);
         }
         String displayString = "Number of usage stats: " + stats.size();
         TextView textViewNumUsageStats = (TextView) findViewById(R.id.number_of_usageStats);
         textViewNumUsageStats.setText(displayString);
 
-        TextView textViewAllPackageNames = (TextView) findViewById(R.id.main_activity_all_package_name);
-        textViewAllPackageNames.setText(strAllPackageNames);
+        //TextView textViewAllPackageNames = (TextView) findViewById(R.id.main_activity_all_package_name);
+        //textViewAllPackageNames.setText(strAllPackageNames);
+        mListView = (ListView) findViewById(R.id.main_activity_all_package_name);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, seriesStrings);
+
+        mListView.setAdapter(adapter);
 
         // More information about Android Plot
         // e.g. Dynamic data
