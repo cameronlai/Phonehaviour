@@ -14,25 +14,39 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by cameron on 13/01/15.
  */
 public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
     private final Context context;
-    private final List<UsageStats> values;
+    private final List<UsageStats> values = new ArrayList<UsageStats>();
     private PackageManager mPackageManager;
     private long mTotalUsageTime;
+
 
     public ListEntryArrayAdapter(Context context, List<UsageStats> values) {
         super(context, R.layout.list_entry, values);
         this.context = context;
-        this.values = values;
         this.mPackageManager = this.context.getPackageManager();
         mTotalUsageTime = 0;
+
+        List<MyUsageStats> mMyUsageStats = new ArrayList<MyUsageStats>();
         for(UsageStats s : values){
             this.mTotalUsageTime += s.getTotalTimeInForeground();
+            mMyUsageStats.add(new MyUsageStats(s));
+        }
+
+        // Sort and add back to array
+        Collections.sort(mMyUsageStats);
+        for(MyUsageStats s : mMyUsageStats){
+            this.values.add(s.stat);
         }
     }
 
@@ -52,6 +66,12 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         String mPackageName = mUsageStats.getPackageName();
         long mPackageUsageTime = mUsageStats.getTotalTimeInForeground();
         int mPercentageUsage = (int) ( (double)mPackageUsageTime / this.mTotalUsageTime * 100);
+        String mPackageUsageTimeString = String.format(
+                "%02dh%02dm%02ds",
+                TimeUnit.MILLISECONDS.toHours(mPackageUsageTime),
+                TimeUnit.MILLISECONDS.toMinutes(mPackageUsageTime) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(mPackageUsageTime) % TimeUnit.MINUTES.toSeconds(1)
+        );
         ApplicationInfo mApplicationInfo;
         Drawable mPackageIcon;
 
@@ -72,7 +92,7 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         }
 
         // Set total run time
-        mTextViewPackageUsage.setText(Long.toString(mPackageUsageTime));
+        mTextViewPackageUsage.setText(mPackageUsageTimeString);
 
         // Set progress bar percentage
         mProgressBar.setProgress(mPercentageUsage);
