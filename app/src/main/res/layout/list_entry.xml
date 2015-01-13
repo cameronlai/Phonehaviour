@@ -1,5 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="6dip"
     android:orientation="horizontal">
@@ -9,17 +9,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight = "10dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        />
+
     <TextView
-        android:id="@+id/firstLine"
+        android:id="@+id/packageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight = "10dp"
-        android:text="firstLine"/>
+        android:text="firstLine"
+        android:layout_toRightOf="@+id/packageIcon"
+        />
 
     <TextView
-        android:id="@+id/secondLine"
+        android:id="@+id/packageUsage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="secondLine"/>
-</LinearLayout>
+        android:text="secondLine"
+        android:layout_toRightOf="@+id/packageTitle"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:paddingRight = "10dp"
+        />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/packageProgressBar"
+        android:layout_below="@+id/packageTitle"
+        android:layout_alignBottom="@+id/packageIcon"
+        android:layout_alignStart="@+id/packageTitle"
+        android:layout_alignEnd="@+id/packageUsage" />
+
+</RelativeLayout>
