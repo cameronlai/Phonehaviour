@@ -60,6 +60,7 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         TextView mTextViewPackageUsage = (TextView) mRowView.findViewById(R.id.packageUsage);
         ImageView mImageView = (ImageView) mRowView.findViewById(R.id.packageIcon);
         ProgressBar mProgressBar = (ProgressBar) mRowView.findViewById(R.id.packageProgressBar);
+        TextView mTextViewProgress = (TextView) mRowView.findViewById(R.id.packageProgress);
 
         // Declare all information handlers
         UsageStats mUsageStats = values.get(position);
@@ -96,6 +97,9 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
 
         // Set progress bar percentage
         mProgressBar.setProgress(mPercentageUsage);
+
+        // Set progress
+        mTextViewProgress.setText(mPercentageUsage + "%");
 
         return mRowView;
     }

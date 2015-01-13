@@ -40,6 +40,19 @@
         android:layout_below="@+id/packageTitle"
         android:layout_alignBottom="@+id/packageIcon"
         android:layout_alignStart="@+id/packageTitle"
-        android:layout_alignEnd="@+id/packageUsage" />
+        android:layout_toStartOf="@+id/packageProgress"
+        android:indeterminate="false"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:id="@+id/packageProgress"
+        android:layout_below="@+id/packageUsage"
+        android:layout_alignParentEnd="true"
+        android:paddingRight = "10dp"
+        android:paddingLeft="10dp"
+        />
 
 </RelativeLayout>
