@@ -35,6 +35,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cameronlai.phonehaviour.MainActivity" />
+            <intent-filter>
+                <action android:name="com.cameronlai.phonehaviour.AboutActivity"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

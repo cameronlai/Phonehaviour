@@ -1,10 +1,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <CheckBoxPreference
-        android:key="example_checkbox"
-        android:title="@string/pref_title_tracking_enabled"
-        android:summary="@string/pref_description_tracking_enabled"
-        android:defaultValue="true" />
+    <Preference
+        android:key="enableUsageStatistics"
+        android:title="Enable Usage Statistics">
+        <intent android:action="android.settings.USAGE_ACCESS_SETTINGS"/>
+    </Preference>
+
+    <Preference
+        android:key="about"
+        android:title="About">
+        <intent android:action="com.cameronlai.phonehaviour.AboutActivity"/>
+    </Preference>
 
 </PreferenceScreen>

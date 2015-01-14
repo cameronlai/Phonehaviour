@@ -3,16 +3,11 @@ package com.cameronlai.phonehaviour;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.audiofx.BassBoost;
-import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,7 +16,6 @@ import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
@@ -67,12 +61,6 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings)
         {
             Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_about)
-        {
-            Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
             return true;
         }
