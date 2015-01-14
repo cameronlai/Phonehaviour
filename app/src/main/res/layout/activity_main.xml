@@ -15,11 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView android:id="@+id/main_activity_plot_title"
-        android:text="@string/main_activity_plot_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <com.androidplot.xy.XYPlot
         android:id="@+id/mySimpleXYPlot"
         android:layout_width="wrap_content"

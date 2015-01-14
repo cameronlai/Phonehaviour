@@ -39,6 +39,8 @@ public class AboutActivity extends ActionBarActivity {
         catch (PackageManager.NameNotFoundException e) {
             // Do Nothing
         }
+        values.add("Author: Cameron Lai");
+        values.add("Website: http://www.cameronlai.com/");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, values);
