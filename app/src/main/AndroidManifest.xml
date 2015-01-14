@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cameronlai.phonehaviour" >
+    package="com.cameronlai.phonehaviour"
+    android:versionName="@string/version">
 
-    <!--<user-permission android:sharedUserId="android.uid.system"/>-->
+    <!-- <user-permission android:sharedUserId="android.uid.system"/> -->
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
 
     <application
@@ -35,8 +36,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cameronlai.phonehaviour.MainActivity" />
+
             <intent-filter>
-                <action android:name="com.cameronlai.phonehaviour.AboutActivity"/>
+                <action android:name="com.cameronlai.phonehaviour.AboutActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

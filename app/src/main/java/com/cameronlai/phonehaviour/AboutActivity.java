@@ -1,20 +1,49 @@
 package com.cameronlai.phonehaviour;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AboutActivity extends ActionBarActivity {
+    private  ListView listView ;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        context = getApplicationContext();
+        List<String> values = new ArrayList<String>();
+
+        // Get ListView object from xml
+        listView = (ListView) findViewById(R.id.about_list);
+
+        // Get Data
+        String mSoftwareVersion = "Software Version: ";
+        try {
+            mSoftwareVersion = mSoftwareVersion.concat(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName);
+            values.add(mSoftwareVersion);
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            // Do Nothing
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -30,13 +59,5 @@ public class AboutActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /** Called when the user clicks the Usage Access Settings button */
-    public void gotoUsageAccessSettings(View view)
-    {
-        // Do something in response to button
-        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-        startActivity(intent);
     }
 }

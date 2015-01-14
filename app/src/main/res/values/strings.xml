@@ -9,4 +9,5 @@
     <string name="main_activity_plot_title">Phone Usage Plot</string>
 
     <string name="main_activity_number_of_usageStats">Number of usage stats: </string>
+    <string name="version">1.0</string>
 </resources>
