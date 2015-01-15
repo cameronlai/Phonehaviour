@@ -10,4 +10,5 @@
 
     <string name="main_activity_number_of_usageStats">Number of usage stats: </string>
     <string name="version">1.0</string>
+    <string name="action_about">About</string>
 </resources>

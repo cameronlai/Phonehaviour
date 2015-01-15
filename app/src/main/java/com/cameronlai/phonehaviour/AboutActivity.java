@@ -1,5 +1,6 @@
 package com.cameronlai.phonehaviour;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,55 +12,37 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class AboutActivity extends ActionBarActivity {
-    private  ListView listView ;
-    private Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        context = getApplicationContext();
-        List<String> values = new ArrayList<String>();
+        Context mContext = getApplicationContext();
+        ListView mListView = (ListView) findViewById(R.id.about_list);
 
-        // Get ListView object from xml
-        listView = (ListView) findViewById(R.id.about_list);
+        List<BasicNameValuePair> list = new ArrayList<BasicNameValuePair>();
+        BasicNameValuePair item;
 
-        // Get Data
-        String mSoftwareVersion = "Software Version: ";
-        try {
-            mSoftwareVersion = mSoftwareVersion.concat(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName);
-            values.add(mSoftwareVersion);
-        }
-        catch (PackageManager.NameNotFoundException e) {
-            // Do Nothing
-        }
-        values.add("Author: Cameron Lai");
-        values.add("Website: http://www.cameronlai.com/");
+        item = new BasicNameValuePair("Version",  mContext.getString(R.string.version));
+        list.add(item);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        item = new BasicNameValuePair("Author",  "Cameron Lai");
+        list.add(item);
 
-        listView.setAdapter(adapter);
-    }
+        item = new BasicNameValuePair("Website",  "http://www.cameronnlai.com");
+        list.add(item);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        TwoLineListArrayAdapter sa = new TwoLineListArrayAdapter(this, list);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        mListView.setAdapter(sa);
     }
 }
