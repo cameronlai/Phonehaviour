@@ -12,9 +12,12 @@
     <string name="version">1.0</string>
     <string name="action_about">About</string>
 
+    <string name="day">Today</string>
+    <string name="week">Last 7 days</string>
+    <string name="month">Last 30 days</string>
     <string-array name="time_choice_arrays">
-        <item>Today</item>
-        <item>Last 7 days</item>
-        <item>Last 30 days</item>
+        <item>@string/day</item>
+        <item>@string/week</item>
+        <item>@string/month</item>
     </string-array>
 </resources>
