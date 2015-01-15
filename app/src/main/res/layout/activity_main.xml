@@ -10,10 +10,10 @@
     android:baselineAligned="false"
     android:orientation="vertical">
 
-    <TextView android:id="@+id/number_of_usageStats"
-        android:text="@string/main_activity_number_of_usageStats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/time_choice_spinner" />
 
     <com.androidplot.xy.XYPlot
         android:id="@+id/mySimpleXYPlot"

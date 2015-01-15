@@ -7,9 +7,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYSeries;
@@ -19,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
-
     private XYPlot plot;
     ListView mListView;
 
@@ -28,6 +31,16 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Spinner spinner = (Spinner) findViewById(R.id.time_choice_spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.time_choice_arrays, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
         // Confirm usage access
         // String tmpSettingStr = Settings.System.getString( getContentResolver(), Settings.ACTION_USAGE_ACCESS_SETTINGS  );
         // If not, prompt the user to set the usage access settings
@@ -78,9 +91,6 @@ public class MainActivity extends ActionBarActivity {
         for (int i=0; i<stats.size(); i++) {
             series1Numbers.add(stats.get(i).getTotalTimeInForeground());
         }
-        String displayString = "Number of usage stats: " + stats.size();
-        TextView textViewNumUsageStats = (TextView) findViewById(R.id.number_of_usageStats);
-        textViewNumUsageStats.setText(displayString);
 
         mListView = (ListView) findViewById(R.id.main_activity_all_package_name);
         ListEntryArrayAdapter adapter = new ListEntryArrayAdapter(this, stats);

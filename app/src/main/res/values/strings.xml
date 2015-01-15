@@ -11,4 +11,10 @@
     <string name="main_activity_number_of_usageStats">Number of usage stats: </string>
     <string name="version">1.0</string>
     <string name="action_about">About</string>
+
+    <string-array name="time_choice_arrays">
+        <item>Today</item>
+        <item>Last 7 days</item>
+        <item>Last 30 days</item>
+    </string-array>
 </resources>
