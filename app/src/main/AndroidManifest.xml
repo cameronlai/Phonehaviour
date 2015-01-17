@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cameronlai.phonehaviour"
-    android:versionName="@string/version">
+    android:versionName="@string/version_value">
 
     <!-- <user-permission android:sharedUserId="android.uid.system"/> -->
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
+            android:label="@string/settings_activity_title"
             android:parentActivityName=".MainActivity"
             android:theme="@style/SettingsTheme" >
             <meta-data
@@ -31,17 +31,11 @@
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about"
+            android:label="@string/about_activity_title"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cameronlai.phonehaviour.MainActivity" />
-
-            <intent-filter>
-                <action android:name="com.cameronlai.phonehaviour.AboutActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
     </application>
 

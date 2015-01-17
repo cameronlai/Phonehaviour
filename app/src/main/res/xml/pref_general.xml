@@ -7,10 +7,4 @@
         <intent android:action="android.settings.USAGE_ACCESS_SETTINGS"/>
     </Preference>
 
-    <Preference
-        android:key="about"
-        android:title="About">
-        <intent android:action="com.cameronlai.phonehaviour.AboutActivity"/>
-    </Preference>
-
 </PreferenceScreen>

@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -80,8 +81,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -98,13 +100,17 @@ public class MainActivity extends ActionBarActivity {
             startActivity(intent);
             return true;
         }
-
+        else if(id == R.id.action_about)
+        {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     public void updateUsageStatistics(int timeSpan)
     {
-        Log.v("myTAG", "UpdatedStatistics");
         // Get usage statistics from Android OS
         final UsageStatsManager mUsageStatManager = (UsageStatsManager) getApplicationContext().getSystemService("usagestats");
         final List<UsageStats> stats = mUsageStatManager.queryUsageStats(timeSpan, 0,  System.currentTimeMillis());
