@@ -47,15 +47,14 @@ public class MainActivity extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
                 String mString = (String) parentView.getItemAtPosition(position);
-                int interval = UsageStatsManager.INTERVAL_DAILY;
                 if (mString == getString(R.string.day)) {
-                    interval = UsageStatsManager.INTERVAL_DAILY;
+                    updateUsageStatistics(UsageStatsManager.INTERVAL_DAILY, 0, System.currentTimeMillis());
                 } else if (mString == getString(R.string.week)) {
-                    interval = UsageStatsManager.INTERVAL_DAILY;
+                    updateUsageStatistics(UsageStatsManager.INTERVAL_WEEKLY, 0, System.currentTimeMillis());
                 } else if (mString == getString(R.string.month)) {
-                    interval = UsageStatsManager.INTERVAL_MONTHLY;
+                    updateUsageStatistics(UsageStatsManager.INTERVAL_MONTHLY, 0, System.currentTimeMillis());
                 }
-                updateUsageStatistics(interval);
+
             }
 
             @Override
@@ -109,16 +108,11 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void updateUsageStatistics(int timeSpan)
+    public void updateUsageStatistics(int timeSpan, long startTime, long endTime)
     {
         // Get usage statistics from Android OS
         final UsageStatsManager mUsageStatManager = (UsageStatsManager) getApplicationContext().getSystemService("usagestats");
-        final List<UsageStats> stats = mUsageStatManager.queryUsageStats(timeSpan, 0,  System.currentTimeMillis());
-
-        List<Number> series1Numbers = new ArrayList<Number>();
-        for (int i=0; i<stats.size(); i++) {
-            series1Numbers.add(stats.get(i).getTotalTimeInForeground());
-        }
+        final List<UsageStats> stats = mUsageStatManager.queryUsageStats(timeSpan, startTime,  endTime);
 
         mListView = (ListView) findViewById(R.id.main_activity_all_package_name);
         ListEntryArrayAdapter adapter = new ListEntryArrayAdapter(this, stats);

@@ -30,17 +30,24 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
     private PackageManager mPackageManager;
     private long mTotalUsageTime;
 
-
     public ListEntryArrayAdapter(Context context, List<UsageStats> values) {
         super(context, R.layout.list_entry, values);
         this.context = context;
         this.mPackageManager = this.context.getPackageManager();
         mTotalUsageTime = 0;
+        ApplicationInfo mApplicationInfo;
 
         List<MyUsageStats> mMyUsageStats = new ArrayList<MyUsageStats>();
         for(UsageStats s : values){
-            this.mTotalUsageTime += s.getTotalTimeInForeground();
-            mMyUsageStats.add(new MyUsageStats(s));
+            // Set application icon
+            try {
+                mApplicationInfo = this.mPackageManager.getApplicationInfo(
+                        s.getPackageName(), PackageManager.GET_ACTIVITIES);
+                this.mTotalUsageTime += s.getTotalTimeInForeground();
+                mMyUsageStats.add(new MyUsageStats(s));
+            }catch (PackageManager.NameNotFoundException e){
+                // Do not add to list
+            }
         }
 
         // Sort and add back to array
@@ -102,6 +109,11 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         mTextViewProgress.setText(mPercentageUsage + "%");
 
         return mRowView;
+    }
+
+    public int getCount()
+    {
+        return values.size();
     }
 }
 
