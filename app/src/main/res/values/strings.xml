@@ -5,8 +5,14 @@
     <!-- End of Global -->
 
     <!-- About Activity -->
-    <string name="version">1.0</string>
     <string name="title_activity_about">About</string>
+
+    <string name="version_key">Version</string>
+    <string name="version_value">1.0</string>
+    <string name="author_key">Author</string>
+    <string name="author_value">Cameron Lai</string>
+    <string name="website_key">Website</string>
+    <string name="website_value">http://www.cameronlai.com/</string>
     <!-- End of About Activity -->
 
     <!-- Main Activity -->
