@@ -25,6 +25,10 @@
         <item>@string/month</item>
     </string-array>
     <string name="total_usage">Total Usage: </string>
+    <string name="help_enable_usage_access">
+        No data available.\n
+        Please go to Settings and enable usage access settings.
+    </string>
     <!-- End of Main Activity -->
 
     <!-- Setting Activity -->

@@ -64,14 +64,19 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         }
 
         TextView mTotalUsageTimeTextView = (TextView) specialDisplayView;
-        String mTotalUsageTimeString = String.format(
-                context.getString(R.string.total_usage) + "%02dd%02dh%02dm%02ds",
-                TimeUnit.MILLISECONDS.toDays(mTotalUsageTime) % 7,
-                TimeUnit.MILLISECONDS.toHours(mTotalUsageTime) % TimeUnit.DAYS.toHours(1),
-                TimeUnit.MILLISECONDS.toMinutes(mTotalUsageTime) % TimeUnit.HOURS.toMinutes(1),
-                TimeUnit.MILLISECONDS.toSeconds(mTotalUsageTime) % TimeUnit.MINUTES.toSeconds(1)
-        );
-        mTotalUsageTimeTextView.setText(mTotalUsageTimeString);
+        if (values.isEmpty()){
+            mTotalUsageTimeTextView.setText(context.getString(R.string.help_enable_usage_access));
+        }
+        else {
+            String mTotalUsageTimeString = String.format(
+                    context.getString(R.string.total_usage) + "%02dd%02dh%02dm%02ds",
+                    TimeUnit.MILLISECONDS.toDays(mTotalUsageTime) % 7,
+                    TimeUnit.MILLISECONDS.toHours(mTotalUsageTime) % TimeUnit.DAYS.toHours(1),
+                    TimeUnit.MILLISECONDS.toMinutes(mTotalUsageTime) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(mTotalUsageTime) % TimeUnit.MINUTES.toSeconds(1)
+            );
+            mTotalUsageTimeTextView.setText(mTotalUsageTimeString);
+        }
     }
 
     @Override
