@@ -2,9 +2,11 @@ package com.cameronlai.phonehaviour;
 
 import android.app.usage.UsageStats;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,8 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
     private final List<UsageStats> values = new ArrayList<UsageStats>();
     private PackageManager mPackageManager;
     private long mTotalUsageTime;
+    private Boolean showPackageNameDirectly;
+    private SharedPreferences mSharedPref;
 
     public ListEntryArrayAdapter(Context context, List<UsageStats> values) {
         super(context, R.layout.list_entry, values);
@@ -32,6 +36,9 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         this.mPackageManager = this.context.getPackageManager();
         mTotalUsageTime = 0;
         ApplicationInfo mApplicationInfo;
+
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
+        showPackageNameDirectly = mSharedPref.getBoolean("pref_show_package_name", false);
 
         List<MyUsageStats> mMyUsageStats = new ArrayList<MyUsageStats>();
         for(UsageStats s : values){
@@ -89,8 +96,13 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
 
         // Set application name
         try {
-            mApplicationInfo = this.mPackageManager.getApplicationInfo(mPackageName, PackageManager.GET_META_DATA);
-            mTextViewPackageName.setText(this.mPackageManager.getApplicationLabel(mApplicationInfo));
+            if (showPackageNameDirectly) {
+                mTextViewPackageName.setText(mPackageName);
+            }
+            else{
+                mApplicationInfo = this.mPackageManager.getApplicationInfo(mPackageName, PackageManager.GET_META_DATA);
+                mTextViewPackageName.setText(this.mPackageManager.getApplicationLabel(mApplicationInfo));
+            }
         }catch (PackageManager.NameNotFoundException e){
             // Catch block
         }

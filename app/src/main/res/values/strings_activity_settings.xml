@@ -5,6 +5,11 @@
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
+    <string name="pref_system_title">System Settings</string>
+    <string name="pref_display_title">Display Settings</string>
+
+    <string name="pref_summary_show_package_name">Show package name instead of application label</string>
+    <string name="pref_title_show_package_name">Show package name</string>
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>

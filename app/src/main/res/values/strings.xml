@@ -24,6 +24,7 @@
         <item>@string/week</item>
         <item>@string/month</item>
     </string-array>
+    <string name="total_usage">Total Usage: </string>
     <!-- End of Main Activity -->
 
     <!-- Setting Activity -->
