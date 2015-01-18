@@ -29,10 +29,14 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
     private long mTotalUsageTime;
     private Boolean showPackageNameDirectly;
     private SharedPreferences mSharedPref;
+    private LayoutInflater inflater;
 
-    public ListEntryArrayAdapter(Context context, List<UsageStats> values) {
+    public ListEntryArrayAdapter(Context context, List<UsageStats> values, View specialDisplayView) {
         super(context, R.layout.list_entry, values);
         this.context = context;
+        this.inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         this.mPackageManager = this.context.getPackageManager();
         mTotalUsageTime = 0;
         ApplicationInfo mApplicationInfo;
@@ -58,13 +62,21 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         for(MyUsageStats s : mMyUsageStats){
             this.values.add(s.stat);
         }
+
+        TextView mTotalUsageTimeTextView = (TextView) specialDisplayView;
+        String mTotalUsageTimeString = String.format(
+                context.getString(R.string.total_usage) + "%02dd%02dh%02dm%02ds",
+                TimeUnit.MILLISECONDS.toDays(mTotalUsageTime) % 7,
+                TimeUnit.MILLISECONDS.toHours(mTotalUsageTime) % TimeUnit.DAYS.toHours(1),
+                TimeUnit.MILLISECONDS.toMinutes(mTotalUsageTime) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(mTotalUsageTime) % TimeUnit.MINUTES.toSeconds(1)
+        );
+        mTotalUsageTimeTextView.setText(mTotalUsageTimeString);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Find all UI elements
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mRowView = inflater.inflate(R.layout.list_entry, parent, false);
         TextView mTextViewPackageName = (TextView) mRowView.findViewById(R.id.packageTitle);
         TextView mTextViewPackageUsage = (TextView) mRowView.findViewById(R.id.packageUsage);

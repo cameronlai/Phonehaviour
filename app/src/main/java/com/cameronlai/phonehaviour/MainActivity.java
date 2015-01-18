@@ -105,7 +105,7 @@ public class MainActivity extends ActionBarActivity {
         final List<UsageStats> stats = mUsageStatManager.queryUsageStats(timeSpan, startTime,  endTime);
 
         mListView = (ListView) findViewById(R.id.main_activity_all_package_name);
-        ListEntryArrayAdapter adapter = new ListEntryArrayAdapter(this, stats);
+        ListEntryArrayAdapter adapter = new ListEntryArrayAdapter(this, stats, findViewById(R.id.main_activity_total_usage_textview));
         mListView.setAdapter(adapter);
     }
 }
