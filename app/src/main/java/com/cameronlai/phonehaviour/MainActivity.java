@@ -38,13 +38,7 @@ public class MainActivity extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
                 String mString = (String) parentView.getItemAtPosition(position);
-                if (mString == getString(R.string.day)) {
-                    updateUsageStatistics(UsageStatsManager.INTERVAL_DAILY, 0, System.currentTimeMillis());
-                } else if (mString == getString(R.string.week)) {
-                    updateUsageStatistics(UsageStatsManager.INTERVAL_WEEKLY, 0, System.currentTimeMillis());
-                } else if (mString == getString(R.string.month)) {
-                    updateUsageStatistics(UsageStatsManager.INTERVAL_MONTHLY, 0, System.currentTimeMillis());
-                }
+                updateUsageStatistics(mString);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -59,6 +53,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
+
+        String mString = (String) mSpinner.getSelectedItem();
+        updateUsageStatistics(mString);
     }
 
     @Override
@@ -96,12 +93,31 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void updateUsageStatistics(int timeSpan, long startTime, long endTime)
+    private void updateUsageStatistics(String timeSpanString)
     {
-        // Get usage statistics from Android OS
-        final UsageStatsManager mUsageStatManager = (UsageStatsManager) getApplicationContext().getSystemService("usagestats");
-        final List<UsageStats> stats = mUsageStatManager.queryUsageStats(timeSpan, startTime,  endTime);
+        final UsageStatsManager mUsageStatManager =
+                (UsageStatsManager) getApplicationContext().getSystemService("usagestats");
+        long startTime = 0;
+        long endTime = System.currentTimeMillis();
 
+        // Get string
+        final List<UsageStats> stats;
+        if (timeSpanString == getString(R.string.day)) {
+            stats = mUsageStatManager.queryUsageStats(
+                    UsageStatsManager.INTERVAL_DAILY, startTime,  endTime);
+        } else if (timeSpanString == getString(R.string.week)) {
+             stats = mUsageStatManager.queryUsageStats(
+                     UsageStatsManager.INTERVAL_WEEKLY, startTime,  endTime);
+        } else if (timeSpanString == getString(R.string.month)) {
+            stats = mUsageStatManager.queryUsageStats(
+                    UsageStatsManager.INTERVAL_MONTHLY, startTime,  endTime);
+        }
+        else
+        {
+            return;
+        }
+
+        // Update ListView
         mListView = (ListView) findViewById(R.id.main_activity_all_package_name);
         ListEntryArrayAdapter adapter = new ListEntryArrayAdapter(this, stats, findViewById(R.id.main_activity_total_usage_textview));
         mListView.setAdapter(adapter);
