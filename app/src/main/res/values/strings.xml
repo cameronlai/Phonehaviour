@@ -21,12 +21,13 @@
     <string name="day">Today</string>
     <string name="week">Last 7 days</string>
     <string name="month">Last 30 days</string>
+    <string name="time_choice_title">Time period: \t</string>
     <string-array name="time_choice_arrays">
         <item>@string/day</item>
         <item>@string/week</item>
         <item>@string/month</item>
     </string-array>
-    <string name="total_usage">Total Usage: </string>
+    <string name="total_usage">Total Usage:\t </string>
     <string name="help_enable_usage_access">
         No data available.\n
         Please go to Settings and enable usage access settings.

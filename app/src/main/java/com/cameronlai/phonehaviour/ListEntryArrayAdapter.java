@@ -69,7 +69,7 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         }
         else {
             String mTotalUsageTimeString = String.format(
-                    context.getString(R.string.total_usage) + "%02dd%02dh%02dm%02ds",
+                    "Total Usage:   " + "%02dd %02dh %02dm %02ds",
                     TimeUnit.MILLISECONDS.toDays(mTotalUsageTime) % 7,
                     TimeUnit.MILLISECONDS.toHours(mTotalUsageTime) % TimeUnit.DAYS.toHours(1),
                     TimeUnit.MILLISECONDS.toMinutes(mTotalUsageTime) % TimeUnit.HOURS.toMinutes(1),
@@ -96,7 +96,7 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         long mPackageUsageTime = mUsageStats.getTotalTimeInForeground();
         int mPercentageUsage = (int) ( (double)mPackageUsageTime / this.mTotalUsageTime * 100);
         String mPackageUsageTimeString = String.format(
-                "%02dh%02dm%02ds",
+                "%02dh %02dm %02ds",
                 TimeUnit.MILLISECONDS.toHours(mPackageUsageTime),
                 TimeUnit.MILLISECONDS.toMinutes(mPackageUsageTime) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(mPackageUsageTime) % TimeUnit.MINUTES.toSeconds(1)
