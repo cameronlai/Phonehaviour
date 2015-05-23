@@ -1,7 +1,7 @@
 #Phonehaviour
 Displaying usage statistics with Android
 
-This open source Android  app looks into your behaviour with your phone. It monitors your usage across 3 time periods, daily, weekly and monthly.
+This open source Android  app helps you monitor your behaviour with your phone. It monitors your usage across 3 time periods, daily, weekly and monthly.
 
 More information about can be found on [my website](http://cameronlai.com/phonehaviour/).
 
