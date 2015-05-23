@@ -2,6 +2,8 @@ package com.cameronlai.phonehaviour;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -23,8 +25,15 @@ public class AboutActivity extends ActionBarActivity {
         final List<BasicNameValuePair> list = new ArrayList<BasicNameValuePair>();
         BasicNameValuePair item;
 
-        item = new BasicNameValuePair(mContext.getString(R.string.version_key),
-                mContext.getString(R.string.version_value));
+        String versionName = "";
+        try {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            versionName = pInfo.versionName;
+        }
+        catch(PackageManager.NameNotFoundException e){
+            // Catch block
+        }
+        item = new BasicNameValuePair(mContext.getString(R.string.version_key), versionName);
         list.add(item);
 
         item = new BasicNameValuePair(mContext.getString(R.string.project_website_key),

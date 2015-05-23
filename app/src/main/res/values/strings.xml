@@ -8,7 +8,6 @@
     <string name="about_activity_title">About</string>
 
     <string name="version_key">Version</string>
-    <string name="version_value">1.0</string>
     <string name="project_website_key">Phonehaviour Website</string>
     <string name="project_website_value">http://www.cameronlai.com/Phonehaviour</string>
     <string name="author_key">Author</string>
