@@ -27,12 +27,16 @@ public class AboutActivity extends ActionBarActivity {
                 mContext.getString(R.string.version_value));
         list.add(item);
 
+        item = new BasicNameValuePair(mContext.getString(R.string.project_website_key),
+                mContext.getString(R.string.project_website_value));
+        list.add(item);
+
         item = new BasicNameValuePair(mContext.getString(R.string.author_key),
                 mContext.getString(R.string.author_value));
         list.add(item);
 
-        item = new BasicNameValuePair(mContext.getString(R.string.website_key),
-                mContext.getString(R.string.website_value));
+        item = new BasicNameValuePair(mContext.getString(R.string.author_website_key),
+                mContext.getString(R.string.author_website_value));
         list.add(item);
 
         TwoLineListArrayAdapter sa = new TwoLineListArrayAdapter(this, list);
@@ -51,6 +55,5 @@ public class AboutActivity extends ActionBarActivity {
 
             }
         });
-
     }
 }
