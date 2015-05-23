@@ -27,7 +27,7 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
     private final List<UsageStats> values = new ArrayList<UsageStats>();
     private PackageManager mPackageManager;
     private long mTotalUsageTime;
-    private Boolean showPackageNameDirectly;
+    private Boolean showFullPackageName;
     private SharedPreferences mSharedPref;
     private LayoutInflater inflater;
 
@@ -42,7 +42,7 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         ApplicationInfo mApplicationInfo;
 
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(this.context);
-        showPackageNameDirectly = mSharedPref.getBoolean("pref_show_package_name", false);
+        showFullPackageName = mSharedPref.getBoolean("pref_show_package_name", false);
 
         List<MyUsageStats> mMyUsageStats = new ArrayList<MyUsageStats>();
         for(UsageStats s : values){
@@ -84,6 +84,7 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
         // Find all UI elements
         View mRowView = inflater.inflate(R.layout.list_entry, parent, false);
         TextView mTextViewPackageName = (TextView) mRowView.findViewById(R.id.packageTitle);
+        TextView mTextViewFullPackageName = (TextView) mRowView.findViewById(R.id.fullPackageName);
         TextView mTextViewPackageUsage = (TextView) mRowView.findViewById(R.id.packageUsage);
         ImageView mImageView = (ImageView) mRowView.findViewById(R.id.packageIcon);
         ProgressBar mProgressBar = (ProgressBar) mRowView.findViewById(R.id.packageProgressBar);
@@ -113,15 +114,18 @@ public class ListEntryArrayAdapter extends ArrayAdapter<UsageStats> {
 
         // Set application name
         try {
-            if (showPackageNameDirectly) {
-                mTextViewPackageName.setText(mPackageName);
-            }
-            else{
-                mApplicationInfo = this.mPackageManager.getApplicationInfo(mPackageName, PackageManager.GET_META_DATA);
-                mTextViewPackageName.setText(this.mPackageManager.getApplicationLabel(mApplicationInfo));
-            }
-        }catch (PackageManager.NameNotFoundException e){
+            mApplicationInfo = this.mPackageManager.getApplicationInfo(mPackageName, PackageManager.GET_META_DATA);
+            mTextViewPackageName.setText(this.mPackageManager.getApplicationLabel(mApplicationInfo));
+        } catch (PackageManager.NameNotFoundException e){
             // Catch block
+        }
+        if (showFullPackageName)
+        {
+            mTextViewFullPackageName.setText(mPackageName);
+        }
+        else
+        {
+            mTextViewFullPackageName.setText("");
         }
 
         // Set total run time

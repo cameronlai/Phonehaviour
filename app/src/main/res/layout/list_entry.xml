@@ -16,8 +16,16 @@
         android:id="@+id/packageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight = "10dp"
-        android:text="firstLine"
+        android:text="package name"
+        android:layout_toRightOf="@+id/packageIcon"
+        />
+
+    <TextView
+        android:id="@+id/fullPackageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="package detail"
+        android:layout_below="@+id/packageTitle"
         android:layout_toRightOf="@+id/packageIcon"
         />
 
@@ -25,7 +33,7 @@
         android:id="@+id/packageUsage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="secondLine"
+        android:text="time used"
         android:layout_toRightOf="@+id/packageTitle"
         android:layout_alignParentRight="true"
         android:gravity="right"
@@ -37,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/packageProgressBar"
-        android:layout_below="@+id/packageTitle"
+        android:layout_below="@+id/fullPackageName"
         android:layout_alignBottom="@+id/packageIcon"
         android:layout_alignStart="@+id/packageTitle"
         android:layout_toStartOf="@+id/packageProgress"
